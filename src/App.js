@@ -54,11 +54,12 @@ class App extends Component {
       } else {
         const { user } = this.state;
         if (user) {
-          database.ref(`goodToGoers/${user.uid}`).set(false);
           if (isAdmin(user)) {
             this.setState({
               goodToGoers: value
             });
+          } else {
+            database.ref(`goodToGoers/${user.uid}`).set(false);
           }
         }
         this.setState({
