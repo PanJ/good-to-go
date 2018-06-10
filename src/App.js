@@ -47,6 +47,16 @@ class App extends Component {
     const database = firebase.database();
     database.ref("goodToGoers").on("value", snapshot => {
       const value = snapshot.val();
+      const { loggedIn, user } = this.state;
+      if (loggedIn) {
+        if (isAdmin(user)) {
+        } else {
+        }
+      } else {
+        this.setState({
+          goodToGoed: false
+        });
+      }
       if (this.state.loggedIn && value && value[this.state.user.uid]) {
         this.setState({
           goodToGoed: true
